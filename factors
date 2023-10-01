@@ -1,14 +1,10 @@
-#!/usr/bin/python3
 import sys
 
 def factorize(n):
     f = []
-    for i in range(2, n+1):
-        while n % i == 0:
+    for i in range(2, n // 2 + 1):
+        if n % i == 0:
             f.append(i)
-            n //= i
-        if n == 1:
-            break
     return f
 
 def main(file_name):
@@ -16,8 +12,9 @@ def main(file_name):
         for line in file:
             n = int(line.strip())
             f = factorize(n)
-            if len(f) == 2:
-                print(f"{n}={f[0]}*{f[1]}")
+            if f:
+                p, q = f[0], n // f[0]
+                print(f"{n}={p}*{q}")
 
 if __name__ == "__main__":
     if len(sys.argv) != 2:
